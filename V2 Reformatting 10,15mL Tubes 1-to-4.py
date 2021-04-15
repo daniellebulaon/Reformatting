@@ -43,16 +43,29 @@ def run(protocol: protocol_api.ProtocolContext):
     #Pipetting Actions
     for source, dest_set in zip(sources, destination_sets):
         r_p.pick_up_tip(tiprack_1000_1.wells()[tip_pickup_count])
-        r_p.aspirate(900, source.top(-92))
+        
+        #dispense round 1
+        r_p.aspirate(550, source.top(-92))
         r_p.air_gap(20)
 
         for i, dest in enumerate(dest_set):  # go through the entries for each tube
-            disp_vol = 20 + 210 if i == 0 else 210
+            disp_vol = 10 + 105 if i == 0 else 105
             tip_pickup_count += 1
 
             r_p.dispense(disp_vol, dest.bottom(5))
             r_p.touch_tip(v_offset=-6, speed=40)
 
+        #dispense round 2
+        r_p.aspirate(500, source.top(-92))
+        r_p.air_gap(20)
+
+        for i, dest in enumerate(dest_set):  # go through the entries for each tube
+            disp_vol = 10 + 105 if i == 0 else 105
+
+            r_p.dispense(disp_vol, dest.bottom(5))
+            r_p.touch_tip(v_offset=-6, speed=40)
+        
+        
         #Home the Z/A mount. Not the pipette
         r_p.air_gap(100)  # aspirate any liquid that may be leftover inside the tip
         protocol._implementation.get_hardware().hardware.home_z(r_p._implementation.get_mount())
