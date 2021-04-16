@@ -27,7 +27,7 @@ def run(protocol: protocol_api.ProtocolContext):
 
     # Mapping of Wells
     sources = [well for rack in tuberacks[::-1] for row in rack.rows()[:0:-1] for well in row[::-1]]
-    destination_sets = [row[i*4:i*4+4] for i in range(3) for row in deepwell_96.rows()[::-1]]
+    destination_sets = [row[i*5:i*5+5] for i in range(3) for row in deepwell_96.rows()[::-1]]
 
     #Pipette max_speeds
     r_p.flow_rate.aspirate = 400
