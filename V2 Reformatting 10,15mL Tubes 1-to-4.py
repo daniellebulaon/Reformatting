@@ -27,7 +27,7 @@ def run(protocol: protocol_api.ProtocolContext):
 
     # Mapping of Wells
     sources = [well for rack in tuberacks[::-1] for row in rack.rows()[:0:-1] for well in row[::-1]]
-    destination_sets = [row[i*5:i*5+5] for i in range(3) for row in deepwell_96.rows()[::-1]]
+    destination_sets = [row[i*5:i*5+7][2:] for i in range(3) for row in deepwell_96.rows()[::-1]][:16]
 
     #Pipette max_speeds
     r_p.flow_rate.aspirate = 400
@@ -60,7 +60,7 @@ def run(protocol: protocol_api.ProtocolContext):
         r_p.air_gap(20)
 
         for i, dest in enumerate(dest_set):  # go through the entries for each tube
-            disp_vol = 10 + 105 if i == 0 else 105
+            disp_vol = 20 + 105 if i == 0 else 105
 
             r_p.dispense(disp_vol, dest.bottom(5))
             r_p.touch_tip(v_offset=-6, speed=40)
