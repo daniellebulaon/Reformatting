@@ -3,7 +3,7 @@ from opentrons.types import Location
 
 metadata = {
 
-    'protocolName': 'V2 Reformatting 10,15mL Tubes 1-to-5 2x105 JL_DB Edits',
+    'protocolName': 'V2 Reformatting 10,15mL Tubes 1-to-5 2x105 JL_DB Edits.py',
     'author': 'Nick Diehl',
     'apiLevel': '2.9'
 }
